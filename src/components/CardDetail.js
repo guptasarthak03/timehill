@@ -47,7 +47,6 @@ const CardDetail = props => {
       mins = mins > 9 ? mins : '0' + mins;
       hrs = hrs > 9 ? hrs : '0' + hrs;
       days = days > 9 ? days : '0' + days;
-      console.log(days, secs, '<-- test');
       setTimer({ days, hrs, mins, secs });
     }
   };

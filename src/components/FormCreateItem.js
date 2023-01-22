@@ -26,7 +26,10 @@ const FormCreateItem = props => {
 
     const newId = itemId + 1;
     setItemId(newId);
-    setUserData([...userData, { ...formData, id: newId }]);
+
+    const data = [...userData, { ...formData, id: newId }];
+    setUserData(data);
+    window.localStorage.setItem('userData', JSON.stringify(data));
   };
 
   return (

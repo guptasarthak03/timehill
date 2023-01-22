@@ -5,7 +5,7 @@ import CardItem from './components/CardItem';
 import FormCreateItem from './components/FormCreateItem';
 
 function App() {
-  const [itemId, setItemId] = useState(1);
+  const [itemId, setItemId] = useState(0);
   const [userData, setUserData] = useState([]);
   const [showForm, setShowForm] = React.useState(false);
 
@@ -17,6 +17,11 @@ function App() {
     // show form to enter data
     setShowForm(true);
   };
+
+  useEffect(() => {
+    const storedData = window.localStorage.getItem('userData');
+    storedData && setUserData(JSON.parse(storedData));
+  }, []);
 
   return (
     <div className="App">

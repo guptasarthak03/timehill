@@ -16,13 +16,13 @@ const CardItem = ({ title, data }) => {
         sx={{ minWidth: 275, maxWidth: 300, mb: 1.5, mx: 1.5 }}
       >
         <CardContent>
-          <Typography variant="h4" component="div">
+          <Typography variant="h5" component="div">
             {title}
           </Typography>
         </CardContent>
         <CardActions style={{ justifyContent: 'center' }}>
           <Button onClick={() => setShowCardDetail(true)} size="small">
-            See Card
+            View
           </Button>
         </CardActions>
       </Card>
