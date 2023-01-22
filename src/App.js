@@ -18,10 +18,6 @@ function App() {
     setShowForm(true);
   };
 
-  useEffect(() => {
-    console.log(userData, '<-- userData');
-  }, [userData]);
-
   return (
     <div className="App">
       <h1>TimeHill ⏳</h1>
@@ -36,7 +32,7 @@ function App() {
       <br /> <br /> <hr /> <br /> <br />
       {userData.length > 0 &&
         userData.map(user => {
-          return <CardItem key={user.id} title={user.title} />;
+          return <CardItem key={user.id} title={user.title} data={user} />;
         })}
       {showForm && (
         <FormCreateItem

@@ -1,0 +1,2 @@
+Timer:
+  1. Initially, Countdown is only set for future (i.e. how much time is left)

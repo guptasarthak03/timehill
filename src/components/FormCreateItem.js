@@ -29,12 +29,6 @@ const FormCreateItem = props => {
     setUserData([...userData, { ...formData, id: newId }]);
   };
 
-  useEffect(() => {
-    console.log(itemId, '<-- cardId');
-  }, [userData]);
-
-  // console.log(value.$d, '<-- date');
-
   return (
     <Dialog open={showForm} onClose={handleFormClose}>
       <DialogTitle>Enter Memory Details</DialogTitle>
