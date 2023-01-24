@@ -26,14 +26,11 @@ const FormCreateItem = props => {
 
     const newId = itemId + 1;
     setItemId(newId);
-    setUserData([...userData, { ...formData, id: newId }]);
+
+    const data = [...userData, { ...formData, id: newId }];
+    setUserData(data);
+    window.localStorage.setItem('userData', JSON.stringify(data));
   };
-
-  useEffect(() => {
-    console.log(itemId, '<-- cardId');
-  }, [userData]);
-
-  // console.log(value.$d, '<-- date');
 
   return (
     <Dialog open={showForm} onClose={handleFormClose}>

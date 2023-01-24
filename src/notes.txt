@@ -1,0 +1,13 @@
+Timer:
+  1. Countdown for both future and past events.
+  2. Set separate fields for both date and time. (with a toggle button)
+  - Initially, Countdown is only set for future (i.e. how much time is left).
+
+Storage: 
+  - Store the current data into the local storage.
+
+Card Item:
+  1. A delete button to delete a particular card.
+  2. An edit button to edit particular card data.
+
+
