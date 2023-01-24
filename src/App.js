@@ -9,13 +9,24 @@ function App() {
   const [userData, setUserData] = useState([]);
   const [showForm, setShowForm] = React.useState(false);
 
-  const handleFormClose = () => {
-    setShowForm(false);
+  // useEffect(() => {
+  //   // testing purposes
+  //   // console.log(userData, '<-- user data');
+  // }, [userData]);
+  // console.log(userData, '<-- user data on render');
+
+  const updateUserData = data => {
+    setUserData(data);
+    window.localStorage.setItem('userData', JSON.stringify(data));
   };
 
-  const onAddBtnClick = () => {
-    // show form to enter data
-    setShowForm(true);
+  const handleDeleteCardBtn = index => {
+    // delete from data
+    const userDataArr = userData;
+    userDataArr.splice(index, 1);
+
+    // render on screen
+    updateUserData([...userDataArr]);
   };
 
   useEffect(() => {
@@ -27,7 +38,7 @@ function App() {
     <div className="App">
       <h1>TimeHill ⏳</h1>
       <Fab
-        onClick={onAddBtnClick}
+        onClick={() => setShowForm(true)}
         size="medium"
         color="secondary"
         aria-label="add"
@@ -36,17 +47,25 @@ function App() {
       </Fab>
       <br /> <br /> <hr /> <br /> <br />
       {userData.length > 0 &&
-        userData.map(user => {
-          return <CardItem key={user.id} title={user.title} data={user} />;
+        userData.map((user, index) => {
+          return (
+            <CardItem
+              key={user.title}
+              title={user.title}
+              data={user}
+              index={index}
+              handleDeleteCardBtn={handleDeleteCardBtn}
+            />
+          );
         })}
       {showForm && (
         <FormCreateItem
-          handleFormClose={handleFormClose}
+          handleFormClose={() => setShowForm(false)}
           showForm={showForm}
           userData={userData}
           itemId={itemId}
-          setUserData={setUserData}
           setItemId={setItemId}
+          updateUserData={updateUserData}
         />
       )}
     </div>

@@ -5,9 +5,17 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardDetail from './CardDetail';
+import AlertModal from '../utility/AlertModal';
+import { useEffect } from 'react';
 
-const CardItem = ({ title, data }) => {
+const CardItem = ({ title, data, index, handleDeleteCardBtn }) => {
   const [showCardDetail, setShowCardDetail] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
+
+  // useEffect(() => {
+  // used for testing
+  //   console.log(deletePopup, '<-- del popup');
+  // }, [deletePopup]);
 
   return (
     <div>
@@ -24,6 +32,9 @@ const CardItem = ({ title, data }) => {
           <Button onClick={() => setShowCardDetail(true)} size="small">
             View
           </Button>
+          <Button onClick={() => setDeletePopup(true)} size="small">
+            Delete
+          </Button>
         </CardActions>
       </Card>
       {showCardDetail && (
@@ -32,6 +43,14 @@ const CardItem = ({ title, data }) => {
           showCardDetail={showCardDetail}
           title={title}
           data={data}
+        />
+      )}
+      {deletePopup && (
+        <AlertModal
+          title="You sure want to delete it?"
+          actionOnYes={() => handleDeleteCardBtn(index)}
+          showModal={deletePopup}
+          setShowModal={setDeletePopup}
         />
       )}
     </div>
