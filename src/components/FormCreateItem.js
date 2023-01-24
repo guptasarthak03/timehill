@@ -15,9 +15,9 @@ const FormCreateItem = props => {
     handleFormClose,
     showForm,
     userData,
-    setUserData,
     itemId,
     setItemId,
+    updateUserData,
   } = props;
   const [formData, setFormData] = useState({ title: '', dateTime: new Date() });
 
@@ -28,8 +28,7 @@ const FormCreateItem = props => {
     setItemId(newId);
 
     const data = [...userData, { ...formData, id: newId }];
-    setUserData(data);
-    window.localStorage.setItem('userData', JSON.stringify(data));
+    updateUserData(data);
   };
 
   return (
