@@ -8,6 +8,6 @@ Storage:
 
 Card Item:
   1. A delete button to delete a particular card.
-  2. An edit button to edit particular card data.
+  2. An edit button to edit particular card data (Title or date for now)
 
 
