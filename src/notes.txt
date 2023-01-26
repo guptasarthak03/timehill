@@ -14,3 +14,7 @@ Storage:
 
 Design:
   1. Mobile Devices
+
+
+Features:
+  1. Adding tags in cards
