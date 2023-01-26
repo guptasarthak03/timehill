@@ -15,6 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const CardDetail = props => {
   const Ref = useRef(null);
   const { showCardDetail, setShowCardDetail, title, data } = props;
+  const [isFutureTimer, setFutureTimer] = useState(true);
   const [timer, setTimer] = useState({
     days: 0,
     hrs: 0,
@@ -22,16 +23,28 @@ const CardDetail = props => {
     secs: 0,
   });
 
-  const calcTime = e => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const secs = Math.floor((total / 1000) % 60);
-    const mins = Math.floor((total / 1000 / 60) % 60);
-    const hrs = Math.floor((total / 1000 / 60 / 60) % 24);
-    const days = Math.floor(total / 1000 / 60 / 60 / 24);
+  const formatTime = unit => {
+    unit = Math.abs(unit); // only postive number (in case of past timer)
+    return unit > 9 ? unit : '0' + unit;
+  };
+
+  const calcCounter = total => {
+    let secs, mins, hrs, days;
+    let closest = total > 0 ? Math.floor : Math.ceil; // future | past: funcitonal chaining
 
     // ms, sec => ms/1000, mins => secs/60, hrs => mins/60, days => hrs/24,
+    secs = closest((total / 1000) % 60);
+    mins = closest((total / 1000 / 60) % 60);
+    hrs = closest((total / 1000 / 60 / 60) % 24);
+    days = closest(total / 1000 / 60 / 60 / 24);
+
+    // formattng time for rendering
+    secs = formatTime(secs);
+    mins = formatTime(mins);
+    hrs = formatTime(hrs);
+    days = formatTime(days);
+
     return {
-      total,
       days,
       hrs,
       mins,
@@ -40,14 +53,13 @@ const CardDetail = props => {
   };
 
   const updateTimer = date => {
-    let { total, days, hrs, mins, secs } = calcTime(date);
+    const total = Date.parse(date) - Date.parse(new Date());
+    let counter = calcCounter(total);
+    setTimer(counter);
 
-    if (total >= 0) {
-      secs = secs > 9 ? secs : '0' + secs;
-      mins = mins > 9 ? mins : '0' + mins;
-      hrs = hrs > 9 ? hrs : '0' + hrs;
-      days = days > 9 ? days : '0' + days;
-      setTimer({ days, hrs, mins, secs });
+    // if past counter
+    if (total < 0) {
+      setFutureTimer(false);
     }
   };
 
@@ -94,6 +106,9 @@ const CardDetail = props => {
         </Toolbar>
       </AppBar>
       <h1 style={{ textAlign: 'center' }}>
+        {isFutureTimer ? 'Time Left' : 'Time Since'}
+      </h1>
+      <h1 style={{ textAlign: 'center', color: '#1F8A70' }}>
         {`${timer.days} days, ${timer.hrs}:${timer.mins}:${timer.secs}`}
       </h1>
     </Dialog>
