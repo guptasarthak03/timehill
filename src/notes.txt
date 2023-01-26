@@ -1,17 +1,16 @@
 Timer:
-  -> Countdown for past events as well.
-  
-  1. Set separate fields for both date and time. (with a toggle button)
-  
-    - Initially, Countdown is only set for future (i.e. how much time is left).
+  -> Set separate fields for both date and time. (with a toggle button)
+
+    - Countdown for future events (i.e. how much time is left).
+    - Countdown for past events is added.
+
+Card Item:
+  -> An edit button to edit particular card data (Title or date for now)
+
+    - A delete button to delete a particular card.
 
 Storage: 
     - Store the current data into the local storage.
-
-Card Item:
-  1. An edit button to edit particular card data (Title or date for now)
-
-    - A delete button to delete a particular card.
 
 Design:
   1. Mobile Devices
